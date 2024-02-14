@@ -1,1 +1,3 @@
-projects
+**/devel/
+**/build/
+**/.catkin_workspace

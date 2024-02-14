@@ -1,0 +1,6 @@
+[submodule "appld_ws/src/warthog"]
+	path = appld_ws/src/warthog
+	url = https://github.com/warthog-cpr/warthog
+[submodule "appld_ws/src/warthog_simulator"]
+	path = appld_ws/src/warthog_simulator
+	url = https://github.com/UTNuclearRobotics/warthog_simulator

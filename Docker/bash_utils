@@ -12,13 +12,13 @@ rosd-stop(){
 
 rosd-shell() {
     # open a shell in the container
-    docker exec -ti rosd_c bash -l
+    docker exec -ti appld_simulation_environment_c bash -l
 }
 
 rosd-build() {
     # if the container is running, stop it
-    if [ "$(docker ps -q -f name=rosd_c)" ]; then
-        echo "stopping container rosd_c..."
+    if [ "$(docker ps -q -f name=appld_simulation_environment_c)" ]; then
+        echo "stopping container appld_simulation_environment_c..."
         docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml down
     fi
     # build the container from the docker-compose file
@@ -27,12 +27,12 @@ rosd-build() {
 
 rosd-dir() {
     # Set the directory of the docker_workshop repo on the host
-	# Usage: rosd-dir path_to_rosd_docker_dir
+	# Usage: rosd-dir path_to_appld_simulation_environment_dir
 	# Alternatively, add it to your .bashrc for convenience
     export ROSD_DIRECTORY=$1
 }
 
 rosd-log() {
     # view the logs of the picogk container
-    docker logs rosd_c
+    docker logs appld_simulation_environment_c
 }

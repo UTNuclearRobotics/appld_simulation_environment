@@ -1,9 +1,9 @@
-FROM ros:noetic-ros-base-focal
+FROM ros:melodic
 
 SHELL ["/bin/bash", "-c"]
 
 # set the ros version
-ENV ROS_DISTRO noetic
+ENV ROS_DISTRO melodic
 
 # install some useful packages and upgrade existing ones
 RUN apt update && apt upgrade -y \
@@ -17,14 +17,24 @@ RUN apt update && apt upgrade -y \
     x11-apps \
     python3-pip \
     python3-catkin-tools \
-    python-is-python3 \
+    # python-is-python3 \
     libqt5websockets5-dev \
     qt5-default
 
 # install ros packages
 # see ../docs/installing_ros_packages.md for alternatives
 RUN DEBIAN_FRONTEND=noninteractive apt install -y \
-    ros-${ROS_DISTRO}-rviz \
+    ros-melodic-diff-drive-controller \
+    ros-melodic-gazebo-ros-pkgs \
+    ros-melodic-gazebo-ros-control \
+    ros-melodic-interactive-marker-twist-server \
+    ros-melodic-joy \
+    ros-melodic-robot \
+    ros-melodic-robot-localization \
+    ros-melodic-ros-controllers \
+    ros-melodic-teleop-twist-joy \
+    ros-melodic-twist-mux \
+    ros-melodic-xacro \
     && rm -rf /var/lib/apt/lists/*
 
 RUN rosdep update
@@ -33,11 +43,11 @@ RUN rosdep update
 WORKDIR /root
 
 # setup a package from github
-RUN git clone https://github.com/ut-amrl/amrl_msgs.git
-RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
-    && cd amrl_msgs \
-    && export ROS_PACKAGE_PATH=`pwd`:$ROS_PACKAGE_PATH \
-    && make -j
+# RUN git clone https://github.com/ut-amrl/amrl_msgs.git
+# RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+#     && cd amrl_msgs \
+#     && export ROS_PACKAGE_PATH=`pwd`:$ROS_PACKAGE_PATH \
+#     && make -j
 
 # setup .bashrc
 SHELL ["/bin/bash", "-l", "-c"]
